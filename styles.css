@@ -1,0 +1,83 @@
+:root{
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --accent:#4f46e5;
+  --accent-2:#06b6d4;
+  --success:#10b981;
+  --danger:#ef4444;
+  --glass: rgba(255,255,255,0.7);
+  --shadow: 0 6px 18px rgba(16,24,40,0.06);
+  --max-width:1200px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:linear-gradient(180deg,var(--bg),#eef2ff 120%);
+  color:#0f172a;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Layout */
+.container{max-width:var(--max-width);margin:0 auto;padding:1rem}
+.topbar{background:transparent;padding:1rem 0}
+.logo{margin:0;display:inline-block;font-weight:700;color:var(--accent)}
+nav{display:inline-block;float:right}
+.nav-btn{background:transparent;border:0;padding:.5rem 0.8rem;margin-left:.25rem;border-radius:8px;color:var(--muted);cursor:pointer}
+.nav-btn.active{color:var(--accent);font-weight:600}
+
+.grid{display:grid;grid-template-columns:2fr 1fr;gap:1rem;align-items:start}
+.column{display:flex;flex-direction:column;gap:1rem}
+.sidebar{position:sticky;top:1rem}
+
+/* Cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.card{
+  background:var(--card);
+  border-radius:14px;
+  padding:1rem;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(11,14,31,0.03);
+}
+
+.card h2{margin:0 0 .5rem 0;font-size:1.05rem}
+.card .tip{margin-top:.6rem;color:var(--muted);font-size:.9rem}
+
+/* BMI card */
+.bmi-value{font-size:2rem;font-weight:700}
+.bmi-category{padding:.3rem .6rem;border-radius:999px;display:inline-block;margin-top:.4rem;font-size:.85rem;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white}
+
+/* Progress bars */
+.progress-wrap{margin-top:.6rem}
+.progress-label{font-weight:600;margin-bottom:.35rem}
+.progress{height:12px;background:#eef2ff;border-radius:999px;overflow:hidden}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0%}
+
+/* List styles */
+.disease-list, .med-list, .history-list, .diet-list{list-style:none;padding:0;margin:0;max-height:220px;overflow:auto}
+.disease-list li, .med-list li, .history-list li, .diet-list li{
+  padding:.5rem;border-radius:8px;margin-bottom:.4rem;background:linear-gradient(180deg,#fff,#fbfdff);display:flex;justify-content:space-between;align-items:center;font-size:.95rem;border:1px solid rgba(11,14,31,0.03)
+}
+.small{font-size:.9rem;color:var(--muted)}
+
+/* Forms */
+form label{display:block;font-size:.9rem;color:var(--muted);margin-bottom:.35rem}
+input[type="date"],input[type="number"],input[type="time"],input[type="text"],select{width:100%;padding:.5rem;border-radius:8px;border:1px solid #e6eef7;background:#fbfdff}
+.row{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin-bottom:.6rem}
+.row.actions{display:flex;gap:.6rem}
+.primary{background:var(--accent);color:white;padding:.6rem 1rem;border:0;border-radius:10px;cursor:pointer}
+button{cursor:pointer}
+
+/* Footer */
+.footer{display:flex;justify-content:space-between;align-items:center;padding:1rem 0;color:var(--muted);font-size:.9rem}
+
+/* Helpers & responsive */
+.hidden{display:none}
+@media (max-width:900px){
+  .grid{grid-template-columns:1fr;padding-bottom:3rem}
+  nav{float:none;margin-top:.5rem}
+  .row{grid-template-columns:1fr}
+}

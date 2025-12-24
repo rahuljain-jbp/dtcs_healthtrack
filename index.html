@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HealthTracker — Health Monitoring Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <h1 class="logo">HealthTracker</h1>
+      <nav>
+        <button id="btnDashboard" class="nav-btn active">Dashboard</button>
+        <button id="btnHistory" class="nav-btn">History</button>
+        <button id="btnMedReminders" class="nav-btn">Med Reminders</button>
+        <button id="btnDiet" class="nav-btn">Diet Plans</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container grid">
+    <!-- Left column: Dashboard -->
+    <section id="dashboard" class="column">
+      <div class="cards">
+        <div class="card card-bmi">
+          <h2>BMI</h2>
+          <div class="bmi-value" id="bmiValue">—</div>
+          <div id="bmiCategory" class="bmi-category">No data</div>
+          <p class="tip" id="bmiTip">Enter weight and height to calculate BMI.</p>
+        </div>
+
+        <div class="card card-water">
+          <h2>Water Intake</h2>
+          <div class="progress-wrap">
+            <div class="progress-label"><span id="waterAmount">0</span> / <span id="waterGoal">2000</span> ml</div>
+            <div class="progress">
+              <div class="progress-bar" id="waterBar" style="width:0%"></div>
+            </div>
+          </div>
+          <p class="tip" id="waterTip">Aim to drink regularly throughout the day.</p>
+        </div>
+
+        <div class="card card-sleep">
+          <h2>Sleep</h2>
+          <div class="progress-wrap">
+            <div class="progress-label"><span id="sleepHours">0</span> / <span id="sleepGoal">8</span> hrs</div>
+            <div class="progress">
+              <div class="progress-bar" id="sleepBar" style="width:0%"></div>
+            </div>
+          </div>
+          <p class="tip" id="sleepTip">Consistency helps — try to keep a steady schedule.</p>
+        </div>
+
+        <div class="card card-disease">
+          <h2>Diagnosed Diseases</h2>
+          <ul id="diseaseList" class="disease-list">
+            <!-- dynamic -->
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry card">
+        <h2>Quick Add Daily Entry</h2>
+        <form id="entryForm">
+          <div class="row">
+            <label> Date
+              <input type="date" id="entryDate" required />
+            </label>
+            <label> Weight (kg)
+              <input type="number" id="weight" min="1" step="0.1" placeholder="e.g. 70" required />
+            </label>
+          </div>
+
+          <div class="row">
+            <label> Height (cm)
+              <input type="number" id="height" min="30" step="0.1" placeholder="e.g. 175" required />
+            </label>
+            <label> Water (ml)
+              <input type="number" id="water" min="0" step="50" placeholder="e.g. 1500" required />
+            </label>
+          </div>
+
+          <div class="row">
+            <label> Sleep (hrs)
+              <input type="number" id="sleep" min="0" step="0.25" placeholder="e.g. 7.5" required />
+            </label>
+
+            <label> Disease (optional)
+              <input type="text" id="disease" placeholder="e.g. Hypertension" />
+            </label>
+          </div>
+
+          <div class="row actions">
+            <button type="submit" class="primary">Save Entry</button>
+            <button type="button" id="btnFillToday">Auto Fill Today</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Right column: Panels -->
+    <aside class="column sidebar">
+      <div id="medRemindersPanel" class="card hidden">
+        <h2>Medicine Reminders</h2>
+        <form id="medForm" class="med-form">
+          <div class="row">
+            <label>Medicine name
+              <input type="text" id="medName" placeholder="e.g. Paracetamol" required />
+            </label>
+          </div>
+
+          <div class="row">
+            <label>Time (HH:MM)
+              <input type="time" id="medTime" required />
+            </label>
+            <label>Dosage
+              <input type="text" id="medDose" placeholder="e.g. 500mg" />
+            </label>
+          </div>
+
+          <div class="row">
+            <label>Repeat
+              <select id="medRepeat">
+                <option value="daily">Daily</option>
+                <option value="once">Once</option>
+              </select>
+            </label>
+            <label>Start Date
+              <input type="date" id="medStart" />
+            </label>
+          </div>
+
+          <div class="row actions">
+            <button type="submit" class="primary">Add Reminder</button>
+          </div>
+        </form>
+
+        <ul id="medList" class="med-list"></ul>
+      </div>
+
+      <div id="historyPanel" class="card hidden">
+        <h2>Health History</h2>
+        <div class="history-controls">
+          <label>From <input type="date" id="historyFrom" /></label>
+          <label>To <input type="date" id="historyTo" /></label>
+          <button id="btnFilter">Filter</button>
+          <button id="btnClearFilter">Clear</button>
+        </div>
+
+        <ul id="historyList" class="history-list"></ul>
+      </div>
+
+      <div id="dietPanel" class="card hidden">
+        <h2>Diet Plans (Scalable)</h2>
+        <p class="small">Create meal items. This structure is simple to extend for weekly plans, macros, templates, and recommendations.</p>
+
+        <form id="dietForm">
+          <div class="row">
+            <label>Plan Title
+              <input type="text" id="dietTitle" placeholder="e.g. Weight Loss Plan" required />
+            </label>
+          </div>
+          <div class="row">
+            <label>Meal / Note
+              <input type="text" id="dietItem" placeholder="e.g. Breakfast: Oats + Milk" required />
+            </label>
+          </div>
+          <div class="row actions">
+            <button class="primary" type="submit">Add Meal Item</button>
+          </div>
+        </form>
+
+        <ul id="dietList" class="diet-list"></ul>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="footer container">
+    <div>© HealthTracker • Beginner-friendly • Responsive</div>
+    <div>Notifications: <span id="notifStatus">Unknown</span></div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

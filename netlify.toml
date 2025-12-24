@@ -1,0 +1,10 @@
+[build]
+  publish = "."
+  command = ""
+
+# SPA fallback — serve index.html for unmatched routes (helpful if you later add client-side routes)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = true
