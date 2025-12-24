@@ -1,0 +1,13 @@
+{
+  "name": "dtcs-healthtrack",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HealthTracker — static health monitoring dashboard",
+  "scripts": {
+    "build": "echo \"No build step required for this static site\""
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {}
+}
